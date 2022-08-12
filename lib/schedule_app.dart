@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:schedule_app/presentation/list_task/list_task_screen.dart';
 
 class ScheduleApp extends StatelessWidget {
   const ScheduleApp({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class ScheduleApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.brown,
       ),
+      home: ListTaskScreen(),
     );
   }
 }
