@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule_app/presentation/create_task/create_task_screen.dart';
+import 'package:schedule_app/presentation/list_task/cubit/tasks_cubit.dart';
 import 'package:schedule_app/presentation/list_task/item_task.dart';
+import 'package:schedule_app/presentation/list_task/list_task_view.dart';
 
 import '../../domain/entities/task.dart';
 import '../../domain/use_cases/get_all_tasks.dart';
@@ -18,40 +21,21 @@ class _ListTaskScreenState extends State<ListTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          ElevatedButton(
-              onPressed: getAllTasks, child: Text('Refrescar lista')),
-          Expanded(
-            child: ListView(
-              children: tasks.map((task) => ItemTask(task: task)).toList(),
-            ),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CreateTaskScreen(),
-              ));
-        },
-        child: const Icon(Icons.add),
-      ),
+    return BlocProvider(
+      create: (context) =>
+          TasksCubit(GetAllTasks(taskRepositoryMemory))..gotAllTask(),
+      child: Scaffold(
+          body: ListTaskView(),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreateTaskScreen(),
+                  ));
+            },
+            child: const Icon(Icons.add),
+          )),
     );
-  }
-
-  void getAllTasks() async {
-    final getAllTasks = GetAllTasks(taskRepositoryMemory);
-
-    final result = await getAllTasks();
-
-    result.fold((l) => null, (r) {
-      setState(() {
-        tasks = r;
-      });
-    });
   }
 }

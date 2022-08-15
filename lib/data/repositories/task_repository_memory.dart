@@ -22,6 +22,7 @@ class TaskRepositoryMemory implements TaskRepository {
 
   @override
   Future<List<Task>> getAll() async {
+    //await Future.delayed(Duration(seconds: 1));
     return tasks;
   }
 
