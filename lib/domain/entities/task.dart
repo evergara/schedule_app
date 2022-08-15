@@ -9,7 +9,7 @@ class Task {
   set description(value) => _description = value;
 
   String? get photo => _photo;
-  set photo(photo) => _photo = photo;
+  set photo(String? photo) => _photo = photo;
 
   String get uuid => _uuid;
 }
