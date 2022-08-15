@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:schedule_app/data/repositories/task_repository_memory.dart';
+import 'package:schedule_app/di/di_container.dart';
 import 'package:schedule_app/domain/entities/task.dart';
 import 'package:schedule_app/domain/repositories/task_repository.dart';
 import 'package:schedule_app/domain/use_cases/create_task.dart';
@@ -38,7 +39,7 @@ class CreateTaskScreen extends StatelessWidget {
   }
 
   void createTask(BuildContext context) async {
-    final createTaskUseCase = CreateTask(taskRepositoryMemory);
+    final createTaskUseCase = servicesLocator<CreateTask>();
     final task = Task(descriptionController.text, const Uuid().v4());
     await createTaskUseCase(task);
   }

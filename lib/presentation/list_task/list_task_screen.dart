@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:schedule_app/di/di_container.dart';
 import 'package:schedule_app/presentation/create_task/create_task_screen.dart';
 import 'package:schedule_app/presentation/list_task/cubit/tasks_cubit.dart';
 import 'package:schedule_app/presentation/list_task/item_task.dart';
@@ -22,8 +23,7 @@ class _ListTaskScreenState extends State<ListTaskScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          TasksCubit(GetAllTasks(taskRepositoryMemory))..gotAllTask(),
+      create: (context) => servicesLocator<TasksCubit>()..gotAllTask(),
       child: Scaffold(
           body: ListTaskView(),
           floatingActionButton: FloatingActionButton(
