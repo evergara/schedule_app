@@ -8,32 +8,28 @@ class ListTaskView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
-          children: [
-            ElevatedButton(
-                onPressed: () => getAllTasks(context),
-                child: Text('Refrescar lista')),
-            Expanded(
-              child: BlocBuilder<TasksCubit, TasksState>(
-                builder: (context, state) {
-                  if (state is TasksSuccess) {
-                    return ListView(
-                      children: state.tasks
-                          .map((task) => ItemTask(task: task))
-                          .toList(),
-                    );
-                  }
-                  if (state is TasksFailure) {
-                    return Text('Error al obtener la data');
-                  }
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-              ),
-            ),
-          ],
-        );
+    return Column(
+      children: [
+        Expanded(
+          child: BlocBuilder<TasksCubit, TasksState>(
+            builder: (context, state) {
+              if (state is TasksSuccess) {
+                return ListView(
+                  children:
+                      state.tasks.map((task) => ItemTask(task: task)).toList(),
+                );
+              }
+              if (state is TasksFailure) {
+                return Text('Error al obtener la data');
+              }
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          ),
+        ),
+      ],
+    );
   }
 
   void getAllTasks(BuildContext context) async {

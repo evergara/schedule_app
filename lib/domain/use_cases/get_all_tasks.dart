@@ -8,7 +8,7 @@ class GetAllTasks {
 
   GetAllTasks(this._taskRepository);
 
-  Future<dartz.Either<String, List<Task>>> call() async {
+  Future<dartz.Either<String, Stream<List<Task>>>> call() async {
     try {
       final tasks = await _taskRepository.getAll();
       return dartz.Right(tasks);

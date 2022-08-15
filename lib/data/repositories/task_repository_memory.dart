@@ -1,11 +1,13 @@
+import 'package:schedule_app/data/stream/tasks_stream_state.dart';
 import 'package:schedule_app/domain/entities/task.dart';
 import 'package:schedule_app/domain/repositories/task_repository.dart';
 
 class TaskRepositoryMemory implements TaskRepository {
-  List<Task> tasks = [];
+  final tasksStreamState = TasksStreamState();
+
   @override
   Future<void> create(Task task) async {
-    tasks.add(task);
+    tasksStreamState.attach(task);
   }
 
   @override
@@ -21,9 +23,9 @@ class TaskRepositoryMemory implements TaskRepository {
   }
 
   @override
-  Future<List<Task>> getAll() async {
+  Future<Stream<List<Task>>> getAll() async {
     //await Future.delayed(Duration(seconds: 1));
-    return tasks;
+    return tasksStreamState.streamEntities;
   }
 
   @override

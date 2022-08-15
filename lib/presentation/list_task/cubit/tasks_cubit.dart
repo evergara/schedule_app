@@ -17,7 +17,28 @@ class TasksCubit extends Cubit<TasksState> {
 
     result.fold(
       (failure) => emit(TasksFailure()),
-      (tasks) => emit(TasksSuccess(tasks)),
+      (Stream<List<Task>> streamTask) async {
+        await _subscribesStreamTasks(
+          streamTask,
+        );
+      },
     );
+  }
+
+  _subscribesStreamTasks(
+    Stream<List<Task>> streamTask,
+  ) async {
+    /*
+    await emit.forEach<List<Task>>(
+      streamTask,
+      onData: (List<Task> tasks) {
+        return TasksSuccess(tasks);
+      },
+      onError: (_, __) => TasksFailure(),
+    );
+    */
+    streamTask.listen((tasks) {
+      emit(TasksSuccess(tasks));
+    });
   }
 }
