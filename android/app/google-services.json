@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "272554828207",
+    "project_id": "schudeleapp",
+    "storage_bucket": "schudeleapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:272554828207:android:3df6c44ff9b20009e98f5a",
+        "android_client_info": {
+          "package_name": "com.example.schedule_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "272554828207-mkbftbieihibibeq2ccskjdd6ett2eea.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBD3bfEZywqABqWP9QFoPCpoy2EhLMh2ZQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "272554828207-mkbftbieihibibeq2ccskjdd6ett2eea.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
