@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
+import 'package:schedule_app/data/repositories/task_repository_firebase.dart';
 import 'package:schedule_app/data/repositories/task_repository_memory.dart';
 import 'package:schedule_app/domain/repositories/task_repository.dart';
 import 'package:schedule_app/presentation/list_task/cubit/tasks_cubit.dart';
@@ -15,6 +17,7 @@ void initDIContainer() {
   servicesLocator.registerLazySingleton(
       () => FindTask(servicesLocator(instanceName: 'MemoryUno')));
   servicesLocator.registerLazySingleton<TaskRepository>(
-      () => TaskRepositoryMemory(),
+      () => TaskRepositoryFirebase(servicesLocator()),
       instanceName: 'MemoryUno');
+  servicesLocator.registerLazySingleton(() => FirebaseFirestore.instance);
 }
